@@ -21,14 +21,14 @@ public class ScreenshotRecorderM {
         NativeImage nativeimage = new NativeImage(i, j, false);
         GlTexture.bindTexture(target.getColorTextureId());
 
-        //TODO screenshot might be requested when cmds have not been submitted yet
-//        RenderPass renderPass = ((ExtendedRenderTarget)target).getRenderPass();
-//
-//        Renderer renderer = Renderer.getInstance();
-//        boolean b = renderer.getBoundRenderPass() == renderPass;
-
-        nativeimage.downloadTexture(0, true);
-
+        // Alteração para evitar o crash ao tirar uma screenshot
+        try {
+            nativeimage.downloadTexture(0, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Ou outra ação apropriada, como lançar uma exceção personalizada
+        }
+        
         //nativeimage.flipY();
         return nativeimage;
     }
