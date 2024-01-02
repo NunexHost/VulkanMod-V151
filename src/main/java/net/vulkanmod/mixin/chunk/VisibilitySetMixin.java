@@ -39,4 +39,9 @@ public class VisibilitySetMixin implements VisibilitySetExtended {
     public boolean visibilityBetween(Direction dir1, Direction dir2) {
         return (this.vis & (1L << ((dir1.ordinal() << 3) + dir2.ordinal()))) != 0;
     }
+
+    @Override
+    public long getVisibility() {
+        return vis;
+    }
 }
